@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="Rails telezda_lite: development" uuid="12569849-851d-4a78-8a7f-c26157e48686">
+      <user-name>tzdadmin</user-name>
+      <user-password>dfc5dfd8dfcedfc1dfd8dfc8</user-password>
+      <schema-pattern>telezda_lite_development.*</schema-pattern>
+      <default-schemas>telezda_lite_development.*</default-schemas>
+    </data-source>
+    <data-source name="Rails telezda_lite: test" uuid="2e122a98-3386-418a-adfc-8f935a4b8aba">
+      <user-name>tzdadmin</user-name>
+      <user-password>dfc5dfd8dfcedfc1dfd8dfc8</user-password>
+      <schema-pattern>telezda_lite_test.*</schema-pattern>
+      <default-schemas>telezda_lite_test.*</default-schemas>
+    </data-source>
+    <data-source name="Rails telezda_lite: production" uuid="77fdf0c5-f44f-4fa5-bfc4-72061ec8a4ed">
+      <first-sync>true</first-sync>
+      <user-name>telezda_lite</user-name>
+      <user-password>df96df8fdf97df8adfefdfe4dffcdff1df8ddffedfefdfe6dfefdff0dfeedfebdff5dfe6dfe3dffedfefdff5dfeedfebdffedfebdfe8dfebdff9dfefdff5dffadfebdff9dff9dffddfe5dff8dfeedf8ddff7df8adf8fdf94</user-password>
+    </data-source>
+  </component>
+</project>
