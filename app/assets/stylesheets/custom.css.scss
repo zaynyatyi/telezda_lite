@@ -1,4 +1,8 @@
 @import "bootstrap-sprockets";
+
+// Import cerulean variables
+@import "bootswatch/cosmo/variables";
+
 @import "bootstrap";
 
 #error_explanation {
@@ -15,3 +19,6 @@
     color: $state-danger-text;
   }
 }
+
+// And finally bootswatch style itself
+@import "bootswatch/cosmo/bootswatch";
