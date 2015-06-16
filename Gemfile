@@ -30,6 +30,9 @@ gem 'bootstrap-sass', '3.3.4.1'
 
 gem 'bootswatch-rails'
 
+gem 'will_paginate',           '3.0.7'
+gem 'bootstrap-will_paginate', '0.0.10'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
