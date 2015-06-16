@@ -7,6 +7,16 @@
     </database-info>
     <case-sensitivity plain-identifiers="mixed" quoted-identifiers="upper"/>
     <schema name="" catalog="telezda_lite_development"/>
+    <table name="items" schema="" catalog="telezda_lite_development" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="user_id" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="created_at" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="updated_at" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="fk_rails_d4b6334db2" columns="user_id" ref-table="users" ref-schema="" ref-catalog="telezda_lite_development" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="index_items_on_user_id" unique="false" columns="user_id"/>
+    </table>
     <table name="schema_migrations" schema="" catalog="telezda_lite_development" type="TABLE">
       <column name="version" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
       <index name="unique_schema_migrations" unique="true" columns="version"/>
@@ -21,6 +31,7 @@
       <column name="remember_digest" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
       <column name="admin" sqlType="TINYINT" precision="3" scale="0" nullable="true" jdbcType="-6" def="MA=="/>
       <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="fk_rails_d4b6334db2" table="items" schema="" catalog="telezda_lite_development" columns="user_id"/>
     </table>
   </data-source>
   <data-source name="Rails telezda_lite: test" uuid="2e122a98-3386-418a-adfc-8f935a4b8aba">
@@ -42,6 +53,7 @@
       <column name="updated_at" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
       <column name="password_digest" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
       <column name="remember_digest" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="admin" sqlType="TINYINT" precision="3" scale="0" nullable="true" jdbcType="-6" def="MA=="/>
       <primary-key name="PRIMARY" columns="id"/>
     </table>
   </data-source>

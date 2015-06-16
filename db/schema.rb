@@ -11,7 +11,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150614192849) do
+ActiveRecord::Schema.define(version: 20150616073905) do
+
+  create_table "buildings", force: :cascade do |t|
+    t.text     "name",       limit: 65535
+    t.integer  "city_id",    limit: 4
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "buildings", ["city_id"], name: "index_buildings_on_city_id", using: :btree
+
+  create_table "cities", force: :cascade do |t|
+    t.text     "name",       limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.text     "name",       limit: 65535
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "items", ["user_id"], name: "index_items_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name",            limit: 255
@@ -23,4 +47,6 @@ ActiveRecord::Schema.define(version: 20150614192849) do
     t.boolean  "admin",           limit: 1,   default: false
   end
 
+  add_foreign_key "buildings", "cities"
+  add_foreign_key "items", "users"
 end
