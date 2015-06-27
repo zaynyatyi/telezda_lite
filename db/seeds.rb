@@ -9,4 +9,6 @@ User.create!(name:  "gordev",
              email: "zaynyatyi@gmail.com",
              password:              "ordkrb",
              password_confirmation: "ordkrb",
-             admin: true)
+             admin: true,
+             activated: true,
+             activated_at: Time.zone.now.to_datetime)
