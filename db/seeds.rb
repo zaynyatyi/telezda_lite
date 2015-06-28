@@ -12,3 +12,5 @@ User.create!(name:  "gordev",
              admin: true,
              activated: true,
              activated_at: Time.zone.now.to_datetime)
+             
+City.new(name: "TestoZavodsk", created_at: Time.zone.now.to_datetime, updated_at: Time.zone.now.to_datetime)
