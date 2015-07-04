@@ -1,11 +1,34 @@
 <% provide(:title, @user.name) %>
 <div class="row">
-  <aside class="col-md-4">
+  <div class="col-md-4">
     <section class="user_info">
       <h1>
         <%= gravatar_for @user %>
         <%= @user.name %>
       </h1>
     </section>
-  </aside>
+  </div>
+  <div class="col-md-4">
+    <section>
+	  <div class="citizenship">
+	    <% if @user == current_user %>
+	      <% if @user.mothercity != nil %>
+		   	You are citizen of <strong>@user.mothercity.name</strong>.
+		  <% else %>
+		  	You are not citizen of any city.<br>
+		  	Choose one:
+		  	<ul class="cities">
+			  <%= render @cities %>
+			</ul>
+		  <% end %>
+	    <% else %>
+	      <% if @user.mothercity != nil %>
+	        This user is citizen of <strong>@user.mothercity.name</strong>.
+	      <% else %>
+	        This user is not citizen of any city.
+	      <% end %>
+	    <% end %>
+      </div>
+    </section>
+  </div>
 </div>
