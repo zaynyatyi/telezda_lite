@@ -13,7 +13,7 @@
 	  <div class="citizenship">
 	    <% if @user == current_user %>
 	      <% if @user.mothercity != nil %>
-		   	You are citizen of <strong>@user.mothercity.name</strong>.
+		   	You are citizen of <strong><%= @user.mothercity.name %></strong>.
 		  <% else %>
 		  	You are not citizen of any city.<br>
 		  	Choose one:
