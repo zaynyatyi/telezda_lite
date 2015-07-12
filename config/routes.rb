@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   resources :password_resets,     only: [:new, :create, :edit, :update]
   resources :cities, controller: 'city' do
     member do
-      get :citizens, :apply
+      get :citizens, :apply, :yard, :tower, :room, :hydroponics
     end
   end
 end

@@ -13,17 +13,17 @@
 	  <div class="citizenship">
 	    <% if @user == current_user %>
 	      <% if @user.mothercity != nil %>
-		   	You are citizen of <strong><%= @user.mothercity.name %></strong>.
+		   	You are citizen of <strong><%= link_to @user.mothercity.name, @user.mothercity %></strong>.
 		  <% else %>
 		  	You are not citizen of any city.<br>
 		  	Choose one:
 		  	<ul class="cities">
-			  <%= render @cities %>
-			</ul>
+			    <%= render @cities %>
+			  </ul>
 		  <% end %>
 	    <% else %>
 	      <% if @user.mothercity != nil %>
-	        This user is citizen of <strong>@user.mothercity.name</strong>.
+	        This user is citizen of <strong><%= link_to @user.mothercity.name, @user.mothercity %></strong>.
 	      <% else %>
 	        This user is not citizen of any city.
 	      <% end %>

@@ -1,0 +1,7 @@
+<ul class="nav navbar-nav navbar-left">
+  <li>
+  <% @places.each do |place| %>
+    <%= link_to place[:name], "#{city_path}/#{place[:action]}" %>
+  <% end %>
+  </li>
+</ul>
