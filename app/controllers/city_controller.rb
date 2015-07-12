@@ -21,19 +21,21 @@ class CityController < ApplicationController
   end
 
   def yard
-
+    current_user.place = "yard"
   end
 
   def tower
-
+    current_user.place = "tower"
+    current_user.save
+    @users = User.where(place: "tower")
   end
 
   def room
-
+    current_user.place = "room"
   end
 
   def hydroponics
-
+    current_user.place = "hydroponics"
   end
 
   private

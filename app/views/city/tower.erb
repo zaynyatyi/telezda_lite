@@ -2,5 +2,17 @@
   <h1>
     You are at Watch Tower of <%= @city.name %>.
   </h1>
-  <%= render "places" %>
+  <div class="col-md-3">
+    <%= render "places" %>
+  </div>
+  <div class="col-md-8">
+    <h3>Users who are stalking tonight</h3>
+    <ul class="users">
+      <% @users.each do |user| %>
+        <li>
+          <p><%= user.name %></p>
+        </li>
+      <% end %>
+    </ul>
+  </div>
 </div>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150628190904) do
+ActiveRecord::Schema.define(version: 20150712184339) do
 
   create_table "buildings", force: :cascade do |t|
     t.text     "name",       limit: 65535
@@ -61,7 +61,10 @@ ActiveRecord::Schema.define(version: 20150628190904) do
     t.datetime "activated_at"
     t.string   "reset_digest",      limit: 255
     t.datetime "reset_sent_at"
+    t.string   "place",             limit: 255
   end
+
+  add_index "users", ["place"], name: "index_users_on_place", using: :btree
 
   add_foreign_key "buildings", "cities"
   add_foreign_key "items", "users"
