@@ -3,6 +3,7 @@ class CityController < ApplicationController
   before_action "logged_in_user"
   before_action "admin_user", only: [:index, :edit, :update, :destroy]
   before_action :init_places_list, only: [:show, :yard, :room, :tower, :hydroponics]
+  before_action :assign_current_place, only: [:yard, :room, :tower, :hydroponics]
 
   def index
     @cities = City.all
@@ -12,6 +13,8 @@ class CityController < ApplicationController
     if current_user.mothercity.id != @city.id
       flash[:warning] = "You have to apply citizenship of one of the cities first."
       redirect_to @user
+    else
+      render 'yard'
     end
   end
 
@@ -21,21 +24,18 @@ class CityController < ApplicationController
   end
 
   def yard
-    current_user.place = "yard"
   end
 
   def tower
-    current_user.place = "tower"
     current_user.save
     @users = User.where(place: "tower")
+    WebsocketRails[:stalkers].trigger 'entered', current_user.name
   end
 
   def room
-    current_user.place = "room"
   end
 
   def hydroponics
-    current_user.place = "hydroponics"
   end
 
   private
@@ -51,5 +51,10 @@ class CityController < ApplicationController
         {name: "Room", action: "room"},
         {name: "Hydroponics", action: "hydroponics"}
       ]
+
+    end
+
+    def assign_current_place
+      current_user.place = action_name
     end
 end

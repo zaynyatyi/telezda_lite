@@ -2,3 +2,5 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require turbolinks
+//= require websocket_rails/main
+
