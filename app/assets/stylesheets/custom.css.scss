@@ -1,9 +1,56 @@
 @import "bootstrap-sprockets";
 
 // Import cerulean variables
-@import "bootswatch/cosmo/variables";
+@import "bootswatch/darkly/variables";
 
 @import "bootstrap";
+
+
+//theme colors customization
+body {
+  color: #ccc;
+  background-image: image-url('background_1.jpg');
+}
+
+.navbar-default {
+  background-color: rgba(0,0,0,0.2);
+
+  .navbar-brand:hover, .navbar-brand:focus {
+    color: #d0d0d0;
+  }
+
+  .navbar-brand {
+    color: #fdffaf;
+  }
+
+  .navbar-nav {
+    li {
+      a {
+        color: #a7afd7;
+      }
+
+      a:active {
+        color: #a3acd3;
+      }
+
+      a:hover, a:focus {
+        color: #fdffaf;
+      }
+    }
+  }
+}
+
+a {
+  color: #a7afd7;
+}
+
+a:active {
+  color: #a3acd3;
+}
+
+a:hover, a:focus {
+  color: #fdffaf;
+}
 
 #error_explanation {
   color: red;
@@ -49,4 +96,4 @@
 }
 
 // And finally bootswatch style itself
-@import "bootswatch/cosmo/bootswatch";
+@import "bootswatch/darkly/bootswatch";
