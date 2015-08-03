@@ -38,6 +38,12 @@ class CityController < ApplicationController
   def hydroponics
   end
 
+  def stalk
+    respond_to do |format|
+      format.js {}
+    end
+  end
+
   private
     def city_params
       params.require(:user).permit(:name)
