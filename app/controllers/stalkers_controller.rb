@@ -4,6 +4,5 @@ class StalkersController < WebsocketRails::BaseController
   end
 
   def leaved
-    WebsocketRails[:stalkers].trigger 'leaved'
   end
 end

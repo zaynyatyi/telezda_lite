@@ -1,0 +1,5 @@
+<% if current_user.is_stalker %>
+  <%= button_to 'stop stalking', unstalk_city_path(@city), class: 'btn btn-warning', :remote => true %>
+<% else %>
+  <%= button_to 'stalk tonight', stalk_city_path(@city), class: 'btn btn-success', :remote => true %>
+<% end %>

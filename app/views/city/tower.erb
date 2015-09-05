@@ -9,17 +9,11 @@
   <div class="col-xs-3">
     <%= render "places" %>
   </div>
-  <div class="col-xs-6">
+  <div class="col-xs-6" id="stalkers_list">
     <h3>Users who are stalking tonight</h3>
-    <ul class="users">
-      <% @users.each do |user| %>
-        <li>
-          <p><%= user.name %></p>
-        </li>
-      <% end %>
-    </ul>
+    <%= render "stalkers" %>
   </div>
-  <div class="col-xs-3">
-    <%= button_to 'stalk tonight', stalk_city_path(@city), class: 'btn btn-success', :remote => true %>
+  <div class="col-xs-3" id="stalking_actions">
+    <%= render "stalking_actions" %>
   </div>
 </div>

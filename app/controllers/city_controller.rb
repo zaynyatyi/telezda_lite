@@ -28,8 +28,7 @@ class CityController < ApplicationController
 
   def tower
     current_user.save
-    @users = User.where(place: "tower")
-    WebsocketRails[:stalkers].trigger 'entered', current_user.name
+    @users = User.where(is_stalker: true)
   end
 
   def room
@@ -39,9 +38,17 @@ class CityController < ApplicationController
   end
 
   def stalk
-    respond_to do |format|
-      format.js {}
-    end
+    @city = City.find(params[:id])
+    current_user.is_stalker = true
+    current_user.save
+    respond_stalkers()
+  end
+
+  def unstalk
+    @city = City.find(params[:id])
+    current_user.is_stalker = false
+    current_user.save
+    respond_stalkers()
   end
 
   private
@@ -62,5 +69,12 @@ class CityController < ApplicationController
 
     def assign_current_place
       current_user.place = action_name
+    end
+
+    def respond_stalkers
+      @users = User.where(is_stalker: true)
+      respond_to do |format|
+        format.js {}
+      end
     end
 end

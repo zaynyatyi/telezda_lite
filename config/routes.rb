@@ -21,7 +21,8 @@ Rails.application.routes.draw do
   resources :cities, controller: 'city' do
     member do
       get :citizens, :apply, :yard, :tower, :room, :hydroponics
-      post :stalk
+      post :stalk, :unstalk
+      get :stalk, :unstalk
     end
   end
 end
