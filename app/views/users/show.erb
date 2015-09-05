@@ -1,6 +1,6 @@
 <% provide(:title, @user.name) %>
 <div class="row">
-  <div class="col-md-4">
+  <div class="col-xs-4">
     <section class="user_info">
       <h1>
         <%= gravatar_for @user %>
@@ -8,7 +8,7 @@
       </h1>
     </section>
   </div>
-  <div class="col-md-4">
+  <div class="col-xs-4">
     <section>
 	  <div class="citizenship">
 	    <% if @user == current_user %>

@@ -7,6 +7,14 @@
 
 
 //theme colors customization
+.container{
+  max-width: none !important;
+  width:970px;
+}
+
+$grid-float-breakpoint: 0;
+$screen-xs-max: 0;
+
 body {
   color: #ccc;
   background-image: image-url('background_1.jpg');
