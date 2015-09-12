@@ -1,6 +1,6 @@
 $(document).ready(function() {
 function unbindAll() {
-
+  stalkers.bind("stalkers_list_changed");
 }
 
 function initDispatcher() {
