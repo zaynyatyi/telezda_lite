@@ -29,6 +29,7 @@ class CityController < ApplicationController
   def tower
     current_user.save
     @users = User.where(is_stalker: true)
+    WebsocketRails["binder"].trigger("rebind", { new_room: "tower" })
   end
 
   def room
@@ -41,6 +42,7 @@ class CityController < ApplicationController
     @city = City.find(params[:id])
     current_user.is_stalker = true
     current_user.save
+    WebsocketRails["stalkers"].trigger("stalkers_list_changed", {})
     respond_stalkers()
   end
 
@@ -48,7 +50,21 @@ class CityController < ApplicationController
     @city = City.find(params[:id])
     current_user.is_stalker = false
     current_user.save
+    WebsocketRails["stalkers"].trigger("stalkers_list_changed", {})
     respond_stalkers()
+  end
+
+  def select_users
+    @users = User.where(is_stalker: true)
+    names = []
+    for user in @users do
+      names.push(user.name)
+    end
+    respond_to do |format|
+      format.json {
+         render json: {:users => names}
+      }
+    end
   end
 
   private

@@ -10,6 +10,9 @@
 <body>
   <%= render 'layouts/header' %>
   <div class="container">
+    <% if logged_in? %>
+      <%= content_tag :div, :id => "place_holder", :data => {:place => current_user.place} do %><% end %>
+    <% end %>
     <% flash.each do |message_type, message| %>
         <div class="alert alert-<%= message_type %>"><%= message %></div>
     <% end %>

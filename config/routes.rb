@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     member do
       get :citizens, :apply, :yard, :tower, :room, :hydroponics
       post :stalk, :unstalk
-      get :stalk, :unstalk
+      get :stalk, :unstalk, :select_users
     end
   end
 end

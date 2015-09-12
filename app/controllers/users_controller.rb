@@ -48,6 +48,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def reply_where
+    WebsocketRails["binder"].trigger("rebind", { new_room: current_user.place })
+  end
+
   private
 
     def user_params

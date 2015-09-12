@@ -3,4 +3,4 @@
 //= require bootstrap
 //= require turbolinks
 //= require websocket_rails/main
-//= require chanels_spy.js
+//= require channels_spy.js
