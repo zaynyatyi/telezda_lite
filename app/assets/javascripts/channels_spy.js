@@ -1,10 +1,10 @@
 $(document).ready(function() {
 function unbindAll() {
-  stalkers.bind("stalkers_list_changed");
+  stalkers.unbind("stalkers_list_changed");
 }
 
 function initDispatcher() {
-  dispatcher = new WebSocketRails('localhost:3001/websocket');
+  dispatcher = new WebSocketRails(window.location.hostname + ':3001/websocket');
 
   dispatcher.bind('connection_closed', function() {
     console.log("client was disconnected");
@@ -39,7 +39,7 @@ function bindTowerListeners() {
 }
 
 //Channels callbacks
-function refreshStalkersList() {
+function refreshStalkersList(data) {
   console.log("stalkers list changed");
   $.ajax({
         url:  "/cities/1/select_users",
@@ -61,6 +61,4 @@ var binder;
 var stalkers;
 
 initDispatcher();
-
-console.log("debug hook");
 });
