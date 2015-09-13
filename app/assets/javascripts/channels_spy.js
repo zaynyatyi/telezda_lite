@@ -41,18 +41,10 @@ $(document).ready(function() {
   //Channels callbacks
   function refreshStalkersList(data) {
     console.log("stalkers list changed");
-    $.ajax({
-      url:  "/cities/1/select_users",
-      dataType: "json",
-      data: {},
-      success: function(data) {
-        console.log(data);
-        var stalkersList = $("#stalkers_list ul");
-        stalkersList.empty();
-        data.users.forEach(function(data){
-          stalkersList.append("<li>" + data + "</li>");
-        });
-      }
+    var stalkersList = $("#stalkers_list ul");
+    stalkersList.empty();
+    data.users.forEach(function(data){
+      stalkersList.append("<li>" + data + "</li>");
     });
   }
 

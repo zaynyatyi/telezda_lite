@@ -42,7 +42,7 @@ class CityController < ApplicationController
     @city = City.find(params[:id])
     current_user.is_stalker = true
     current_user.save
-    WebsocketRails["stalkers"].trigger("stalkers_list_changed", {})
+    notify_stalkers_changed()
     respond_stalkers()
   end
 
@@ -50,21 +50,17 @@ class CityController < ApplicationController
     @city = City.find(params[:id])
     current_user.is_stalker = false
     current_user.save
-    WebsocketRails["stalkers"].trigger("stalkers_list_changed", {})
+    notify_stalkers_changed()
     respond_stalkers()
   end
 
-  def select_users
+  def notify_stalkers_changed
     @users = User.where(is_stalker: true)
     names = []
     for user in @users do
       names.push(user.name)
     end
-    respond_to do |format|
-      format.json {
-         render json: {:users => names}
-      }
-    end
+    WebsocketRails["stalkers"].trigger("stalkers_list_changed", {:users => names})
   end
 
   private
