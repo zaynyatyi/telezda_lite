@@ -1,5 +1,6 @@
 class CityController < ApplicationController
   include UsersHelper
+  before_action :check_migrations
   before_action "logged_in_user"
   before_action "admin_user", only: [:index, :edit, :update, :destroy]
   before_action :init_places_list, only: [:show, :yard, :room, :tower, :hydroponics]
@@ -64,6 +65,17 @@ class CityController < ApplicationController
   end
 
   private
+    def check_migrations
+      city = City.find(params[:id])
+      if city.stock == nil
+        city.stock = Stock.new
+      end
+
+      if current_user.stock == nil
+        current_user.stock = Stock.new
+      end
+    end
+
     def city_params
       params.require(:user).permit(:name)
     end

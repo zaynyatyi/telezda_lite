@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150905140801) do
+ActiveRecord::Schema.define(version: 20150913180949) do
 
   create_table "buildings", force: :cascade do |t|
     t.text     "name",       limit: 65535
@@ -44,9 +44,21 @@ ActiveRecord::Schema.define(version: 20150905140801) do
     t.integer  "user_id",    limit: 4
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.integer  "stock_id",   limit: 4
   end
 
+  add_index "items", ["stock_id"], name: "index_items_on_stock_id", using: :btree
   add_index "items", ["user_id"], name: "index_items_on_user_id", using: :btree
+
+  create_table "stocks", force: :cascade do |t|
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.integer  "city_id",    limit: 4
+    t.integer  "user_id",    limit: 4
+  end
+
+  add_index "stocks", ["city_id"], name: "index_stocks_on_city_id", using: :btree
+  add_index "stocks", ["user_id"], name: "index_stocks_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name",              limit: 255
@@ -68,5 +80,8 @@ ActiveRecord::Schema.define(version: 20150905140801) do
   add_index "users", ["place"], name: "index_users_on_place", using: :btree
 
   add_foreign_key "buildings", "cities"
+  add_foreign_key "items", "stocks"
   add_foreign_key "items", "users"
+  add_foreign_key "stocks", "cities"
+  add_foreign_key "stocks", "users"
 end
