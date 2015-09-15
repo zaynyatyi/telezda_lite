@@ -72,6 +72,28 @@ class User < ActiveRecord::Base
     reset_sent_at < 2.hours.ago
   end
 
+  def take(item)
+    item.user = self
+    item.stock = nil
+    item.save()
+  end
+
+  def drop(item, stock)
+    if stock != nil
+      item.stock = stock
+      item.user = nil
+      item.save()
+    end
+  end
+
+  def give(item, user)
+    if user != nil
+      item.user = user
+      item.stock = nil
+      item.save()
+    end
+  end
+
   private
     # Converts email to all lower-case.
     def downcase_email

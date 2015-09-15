@@ -25,10 +25,11 @@ class CityController < ApplicationController
   end
 
   def yard
+    @user_items = Item.where(user: current_user)
+    @sock_items = Item.where(stock: @city.stock)
   end
 
   def tower
-    current_user.save
     @users = User.where(is_stalker: true)
     WebsocketRails["binder"].trigger("rebind", { new_room: "tower" })
   end
@@ -37,6 +38,7 @@ class CityController < ApplicationController
   end
 
   def hydroponics
+
   end
 
   def stalk
