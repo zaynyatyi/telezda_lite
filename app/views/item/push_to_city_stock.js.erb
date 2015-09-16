@@ -1,0 +1,8 @@
+var user_items_names = <%= raw @user_items_names.to_json %>
+var city_id = <%= raw @city_id %>
+
+var userList = $("#user_items_list ul");
+userList.empty();
+user_items_names.forEach(function(item){
+  userList.append('<li><a data-remote="true" href="/cities/' + city_id + '/item/' + item.id + '/push_to_city_stock">' + item.name + '</a></li>');
+});

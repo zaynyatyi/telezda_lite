@@ -8,8 +8,9 @@ class ItemController < ApplicationController
         item.stock = stock
         item.user = nil
         item.save()
-        notify_items_in_stock_changed(stock)
+        notify_items_in_stock_changed(stock, params[:city_id])
         respond_to do |format|
+          prepare_user_items(params[:city_id])
           format.js {}
         end
       end
@@ -24,8 +25,9 @@ class ItemController < ApplicationController
         item.stock = nil
         item.user = current_user
         item.save()
-        notify_items_in_stock_changed(stock)
+        notify_items_in_stock_changed(stock, params[:city_id])
         respond_to do |format|
+          prepare_user_items(params[:city_id])
           format.js {}
         end
       end
@@ -33,22 +35,27 @@ class ItemController < ApplicationController
   end
 
   private
-    def notify_items_in_stock_changed(city_stock)
-      user_items = Item.where(user: current_user)
+    def notify_items_in_stock_changed(city_stock, city_id)
       stock_items = Item.where(stock: city_stock)
-      user_items_names = []
       stock_items_names = []
-      if user_items != nil
-        for user_item in user_items do
-          user_items_names.push(user_item.name)
-        end
-      end
+
       if stock_items != nil
         for stock_item in stock_items do
-          stock_items_names.push(stock_item.name)
+          stock_items_names.push({ name: stock_item.name, id: stock_item.id })
         end
       end
-      WebsocketRails["items"].trigger("items_list_changed", {:user_items => user_items_names, :stock_items => stock_items_names})
+      WebsocketRails["items"].trigger("items_list_changed", {:city_id => city_id, :stock_items => stock_items_names})
+    end
+
+    def prepare_user_items(city_id)
+      user_items = Item.where(user: current_user)
+      @user_items_names = []
+      @city_id = city_id
+      if user_items != nil
+        for user_item in user_items do
+          @user_items_names.push({ name: user_item.name, id: user_item.id })
+        end
+      end
     end
 
 end

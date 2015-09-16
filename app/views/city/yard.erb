@@ -10,7 +10,7 @@
     <ul>
       <% @user_items.each do |item| %>
       <li>
-        <p><%= button_to item.name, city_item_push_to_city_stock_path(@city, item.id), class: 'btn btn-regular btn-xs', :remote => true %></p>
+        <p><%= link_to item.name, city_item_push_to_city_stock_path(@city, item.id), class: 'btn btn-regular btn-xs', :remote => true %></p>
       </li>
       <% end %>
     </ul>
@@ -21,7 +21,7 @@
     <ul>
       <% @stock_items.each do |item| %>
       <li>
-        <p><%= button_to item.name, city_item_pop_from_city_stock_path(@city, item.id), class: 'btn btn-regular btn-xs', :remote => true %></p>
+        <p><%= link_to item.name, city_item_pop_from_city_stock_path(@city, item.id), class: 'btn btn-regular btn-xs', role: "button", :remote => true %></p>
       </li>
       <% end %>
     </ul>

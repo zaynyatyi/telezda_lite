@@ -58,16 +58,10 @@ $(document).ready(function() {
   }
 
   function refreshItemsLists(data) {
-    console.log("items list changed");
-    var userList = $("#user_items_list ul");
-    userList.empty();
-    data.user_items.forEach(function(data){
-      userList.append("<li>" + data + "</li>");
-    });
     var stockList = $("#stock_items_list ul");
     stockList.empty();
-    data.stock_items.forEach(function(data){
-      stockList.append("<li>" + data + "</li>");
+    data.stock_items.forEach(function(item){
+      stockList.append('<li><a data-remote="true" href="/cities/' + data.city_id + '/item/' + item.id + '/pop_from_city_stock">' + item.name + '</a></li>');
     });
   }
 
