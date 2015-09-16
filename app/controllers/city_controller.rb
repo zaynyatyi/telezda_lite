@@ -15,7 +15,7 @@ class CityController < ApplicationController
       flash[:warning] = "You have to apply citizenship of one of the cities first."
       redirect_to @user
     else
-      render 'yard'
+      redirect_to :yard
     end
   end
 
@@ -26,7 +26,7 @@ class CityController < ApplicationController
 
   def yard
     @user_items = Item.where(user: current_user)
-    @sock_items = Item.where(stock: @city.stock)
+    @stock_items = Item.where(stock: @city.stock)
   end
 
   def tower
@@ -65,6 +65,8 @@ class CityController < ApplicationController
     end
     WebsocketRails["stalkers"].trigger("stalkers_list_changed", {:users => names})
   end
+
+
 
   private
     def check_migrations

@@ -23,5 +23,9 @@ Rails.application.routes.draw do
       get :citizens, :apply, :yard, :tower, :room, :hydroponics
       post :stalk, :unstalk
     end
+    resources :item do
+      get :push_to_city_stock, :pop_from_city_stock
+      post :push_to_city_stock, :pop_from_city_stock
+    end
   end
 end

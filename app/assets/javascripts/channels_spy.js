@@ -1,6 +1,7 @@
 $(document).ready(function() {
   function unbindAll() {
     stalkers.unbind("stalkers_list_changed");
+    stalkers.unbind("items_list_changed");
   }
 
   function initDispatcher() {
@@ -15,6 +16,7 @@ $(document).ready(function() {
     binder = dispatcher.subscribe('binder');
 
     stalkers = dispatcher.subscribe('stalkers');
+    items = dispatcher.subscribe('items');
 
     // bind to a channel event
     binder.bind('rebind', handlePlaceChanged);
@@ -31,11 +33,18 @@ $(document).ready(function() {
       case "tower":
         bindTowerListeners();
       break;
+      case "yard":
+        bindYardListeners();
+      break;
     }
   }
 
   function bindTowerListeners() {
     stalkers.bind("stalkers_list_changed", refreshStalkersList);
+  }
+
+  function bindYardListeners() {
+    items.bind("items_list_changed", refreshItemsLists);
   }
 
   //Channels callbacks
@@ -48,9 +57,24 @@ $(document).ready(function() {
     });
   }
 
+  function refreshItemsLists(data) {
+    console.log("items list changed");
+    var userList = $("#user_items_list ul");
+    userList.empty();
+    data.user_items.forEach(function(data){
+      userList.append("<li>" + data + "</li>");
+    });
+    var stockList = $("#stock_items_list ul");
+    stockList.empty();
+    data.stock_items.forEach(function(data){
+      stockList.append("<li>" + data + "</li>");
+    });
+  }
+
   var dispatcher;
   var binder;
   var stalkers;
+  var items;
 
   initDispatcher();
 });
