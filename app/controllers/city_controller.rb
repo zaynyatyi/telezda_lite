@@ -15,7 +15,7 @@ class CityController < ApplicationController
       flash[:warning] = "You have to apply citizenship of one of the cities first."
       redirect_to @user
     else
-      redirect_to :yard
+      redirect_to :action => "yard", :id => @city.id
     end
   end
 
