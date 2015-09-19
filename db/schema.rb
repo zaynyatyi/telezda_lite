@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150913180949) do
+ActiveRecord::Schema.define(version: 20150919090835) do
 
   create_table "buildings", force: :cascade do |t|
     t.text     "name",       limit: 65535
@@ -39,11 +39,29 @@ ActiveRecord::Schema.define(version: 20150913180949) do
   add_index "citizenships", ["city_id", "citizen_id"], name: "index_citizenships_on_city_id_and_citizen_id", unique: true, using: :btree
   add_index "citizenships", ["city_id"], name: "index_citizenships_on_city_id", using: :btree
 
+  create_table "defined_items", force: :cascade do |t|
+    t.string   "name",       limit: 30
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  add_index "defined_items", ["name"], name: "index_defined_items_on_name", unique: true, using: :btree
+
+  create_table "item_descriptions", force: :cascade do |t|
+    t.integer  "item_id",         limit: 4
+    t.integer  "defined_item_id", limit: 4
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "item_descriptions", ["defined_item_id"], name: "index_item_descriptions_on_defined_item_id", using: :btree
+  add_index "item_descriptions", ["item_id", "defined_item_id"], name: "index_item_descriptions_on_item_id_and_defined_item_id", unique: true, using: :btree
+  add_index "item_descriptions", ["item_id"], name: "index_item_descriptions_on_item_id", using: :btree
+
   create_table "items", force: :cascade do |t|
-    t.text     "name",       limit: 65535
     t.integer  "user_id",    limit: 4
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
     t.integer  "stock_id",   limit: 4
   end
 

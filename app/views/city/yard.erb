@@ -10,7 +10,7 @@
     <ul>
       <% @user_items.each do |item| %>
       <li>
-        <%= link_to city_item_push_to_city_stock_path(@city, item.id), remote: true, title: item.name do%>
+        <%= link_to city_item_push_to_city_stock_path(@city, item.id), remote: true, title: item.description.name do%>
           <div class="item_thumbnail"></div>
         <% end %>
       </li>
@@ -23,10 +23,10 @@
     <ul>
       <% @stock_items.each do |item| %>
       <li>
-        <%= link_to city_item_pop_from_city_stock_path(@city, item.id), class: "pop_link", remote: true, title: item.name do %>
+        <%= link_to city_item_pop_from_city_stock_path(@city, item.id), class: "pop_link", remote: true, title: item.description.name do %>
           <div class="item_thumbnail"></div>
         <% end %>
-        <%= link_to city_item_pop_from_city_stock_path(@city, item.id), class: "craft_link", remote: true, title: "Move to crafting slot" do %>
+        <%= link_to "#", class: "craft_link", remote: true, title: "Move to crafting slot" do %>
           <div class="craft_button"></div>
         <% end %>
       </li>

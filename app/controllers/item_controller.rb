@@ -41,7 +41,7 @@ class ItemController < ApplicationController
 
       if stock_items != nil
         for stock_item in stock_items do
-          stock_items_names.push({ name: stock_item.name, id: stock_item.id })
+          stock_items_names.push({ name: stock_item.description.name, id: stock_item.id })
         end
       end
       WebsocketRails["items"].trigger("items_list_changed", {:city_id => city_id, :stock_items => stock_items_names})
@@ -53,7 +53,7 @@ class ItemController < ApplicationController
       @city_id = city_id
       if user_items != nil
         for user_item in user_items do
-          @user_items_names.push({ name: user_item.name, id: user_item.id })
+          @user_items_names.push({ name: user_item.description.name, id: user_item.id })
         end
       end
     end
