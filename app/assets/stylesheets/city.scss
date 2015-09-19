@@ -1,3 +1,34 @@
 // Place all the styles related to the City controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.item_thumbnail {
+  width: 25px;
+  height: 25px;
+  background-color: #ddd;
+}
+
+.craft_button {
+  width: 25px;
+  height: 25px;
+  background-color: #2d4;
+}
+
+.pop_link {
+  float: left;
+}
+
+.craft_link {
+  float: right;
+}
+
+.items_list {
+  ul {
+    list-style-type: none;
+
+    li {
+      margin-bottom: 4px;
+      width: 60px;
+      height: 25px;
+    }
+  }
+}
