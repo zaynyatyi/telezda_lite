@@ -61,16 +61,7 @@ $(document).ready(function() {
     var stockList = $("#stock_items_list ul");
     stockList.empty();
     data.stock_items.forEach(function(item) {
-      var href = '/cities/' + data.city_id + '/item/' + item.id + '/pop_from_city_stock';
-      var html = '<li> \
-                    <a class="pop_link" title="'+ item.name + '" data-remote="true" href="' + href + '"> \
-                      <div class="item_thumbnail"><img src="/assets/thumbnails/' + item.name + '.png" /></div> \
-                    </a> \
-                    <a class="craft_link" title="Move to crafting slot" data-remote="true" href="#"> \
-                      <div class="craft_button"></div> \
-                    </a> \
-                  </li>';
-      stockList.append(html);
+      stockList.append(generate_stock_item(data.city_id, item));
     });
   }
 

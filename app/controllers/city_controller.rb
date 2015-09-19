@@ -66,8 +66,6 @@ class CityController < ApplicationController
     WebsocketRails["stalkers"].trigger("stalkers_list_changed", {:users => names})
   end
 
-
-
   private
     def check_migrations
       city = City.find(params[:id])
