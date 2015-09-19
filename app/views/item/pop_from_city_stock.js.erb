@@ -3,6 +3,11 @@ var city_id = <%= raw @city_id %>
 
 var userList = $("#user_items_list ul");
 userList.empty();
-user_items_names.forEach(function(item){
-  userList.append('<li><a data-remote="true" href="/cities/' + city_id + '/item/' + item.id + '/push_to_city_stock">' + item.name + '</a></li>');
+user_items_names.forEach(function(item) {
+  var href = '/cities/' + city_id + '/item/' + item.id + '/push_to_city_stock';
+
+  var html = '<li><a title="'+ item.name + '" data-remote="true" href="' + href + '"> \
+                <div class="item_thumbnail"></div> \
+              </a></li>';
+  userList.append(html);
 });
