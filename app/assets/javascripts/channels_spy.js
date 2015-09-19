@@ -64,7 +64,7 @@ $(document).ready(function() {
       var href = '/cities/' + data.city_id + '/item/' + item.id + '/pop_from_city_stock';
       var html = '<li> \
                     <a class="pop_link" title="'+ item.name + '" data-remote="true" href="' + href + '"> \
-                      <div class="item_thumbnail"></div> \
+                      <div class="item_thumbnail"><img src="/assets/thumbnails/' + item.name + '.png" /></div> \
                     </a> \
                     <a class="craft_link" title="Move to crafting slot" data-remote="true" href="#"> \
                       <div class="craft_button"></div> \

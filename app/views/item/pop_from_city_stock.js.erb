@@ -7,7 +7,7 @@ user_items_names.forEach(function(item) {
   var href = '/cities/' + city_id + '/item/' + item.id + '/push_to_city_stock';
 
   var html = '<li><a title="'+ item.name + '" data-remote="true" href="' + href + '"> \
-                <div class="item_thumbnail"></div> \
+                <div class="item_thumbnail"><img src="/assets/thumbnails/' + item.name + '.png" /></div> \
               </a></li>';
   userList.append(html);
 });
