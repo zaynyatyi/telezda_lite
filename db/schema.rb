@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150919090835) do
+ActiveRecord::Schema.define(version: 20150919123957) do
 
   create_table "buildings", force: :cascade do |t|
     t.text     "name",       limit: 65535
@@ -68,6 +68,21 @@ ActiveRecord::Schema.define(version: 20150919090835) do
   add_index "items", ["stock_id"], name: "index_items_on_stock_id", using: :btree
   add_index "items", ["user_id"], name: "index_items_on_user_id", using: :btree
 
+  create_table "recipes", force: :cascade do |t|
+    t.string   "name",           limit: 255
+    t.integer  "item_1_id",      limit: 4
+    t.integer  "item_2_id",      limit: 4
+    t.integer  "item_3_id",      limit: 4
+    t.integer  "item_result_id", limit: 4
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "recipes", ["item_1_id"], name: "fk_rails_0da0013e42", using: :btree
+  add_index "recipes", ["item_2_id"], name: "fk_rails_098d834e54", using: :btree
+  add_index "recipes", ["item_3_id"], name: "fk_rails_da1f1f3100", using: :btree
+  add_index "recipes", ["item_result_id"], name: "fk_rails_ae997c941f", using: :btree
+
   create_table "stocks", force: :cascade do |t|
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
@@ -100,6 +115,10 @@ ActiveRecord::Schema.define(version: 20150919090835) do
   add_foreign_key "buildings", "cities"
   add_foreign_key "items", "stocks"
   add_foreign_key "items", "users"
+  add_foreign_key "recipes", "defined_items", column: "item_1_id"
+  add_foreign_key "recipes", "defined_items", column: "item_2_id"
+  add_foreign_key "recipes", "defined_items", column: "item_3_id"
+  add_foreign_key "recipes", "defined_items", column: "item_result_id"
   add_foreign_key "stocks", "cities"
   add_foreign_key "stocks", "users"
 end

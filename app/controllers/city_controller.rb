@@ -27,6 +27,8 @@ class CityController < ApplicationController
   def yard
     @user_items = Item.where(user: current_user)
     @stock_items = Item.where(stock: @city.stock)
+
+    @recipes = Recipe.all
   end
 
   def tower
