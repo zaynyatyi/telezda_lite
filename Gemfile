@@ -25,11 +25,11 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
-
+# sass css compiler
 gem 'bootstrap-sass', '3.3.4.1'
-
+# easy to use bootstrap styles for first time
 gem 'bootswatch-rails'
-
+# pagination for user lists, recipes, etc. with bootstrap styles
 gem 'will_paginate',           '3.0.7'
 gem 'bootstrap-will_paginate', '0.0.10'
 
@@ -38,9 +38,11 @@ gem 'bootstrap-will_paginate', '0.0.10'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+# since we are using websockets to notify users about list changes
 gem 'websocket-rails', github: 'moaa/websocket-rails', branch: 'sync_fixes'
-
+# we need to provide periodical events
 gem 'whenever', :require => false
+gem 'rails_admin'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

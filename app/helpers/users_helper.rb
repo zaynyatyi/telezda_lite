@@ -6,7 +6,7 @@ module UsersHelper
     gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}"
     image_tag(gravatar_url, alt: user.name, class: "gravatar")
   end
-  
+
   # Before filters
 
   # Confirms a logged-in user.
@@ -27,5 +27,9 @@ module UsersHelper
   # Confirms an admin user.
   def admin_user
     redirect_to(root_url) unless current_user.admin?
+  end
+
+  def current_admin
+    return current_user != nil && current_user.admin?
   end
 end
