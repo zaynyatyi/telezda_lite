@@ -28,11 +28,35 @@
 .items_list {
   ul {
     list-style-type: none;
+    padding: 0;
+    margin-left: 10px;
+    max-height: 100px;
 
     li {
-      margin-bottom: 4px;
-      width: 60px;
+      margin-bottom: 10px;
+      margin-right: 10px;
       height: 25px;
+      float: left;
     }
   }
+}
+
+#user_items_list {
+  ul {
+    li {
+      width: 60px;
+    }
+  }
+}
+
+#stock_items_list {
+  ul {
+    li {
+      width: 25px;
+    }
+  }
+}
+
+.craft_slot {
+  height: 70px;
 }

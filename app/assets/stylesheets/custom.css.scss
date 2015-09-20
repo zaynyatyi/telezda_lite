@@ -103,5 +103,9 @@ a:hover, a:focus {
   }
 }
 
+.bordered {
+  border: solid white 1px;
+}
+
 // And finally bootswatch style itself
 @import "bootswatch/darkly/bootswatch";
