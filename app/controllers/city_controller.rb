@@ -1,6 +1,6 @@
 class CityController < ApplicationController
   include UsersHelper
-  before_action :check_migrations
+  before_action :check_migrations, only: [:yard, :room, :tower, :hydroponics]
   before_action "logged_in_user"
   before_action "admin_user", only: [:index, :edit, :update, :destroy]
   before_action :init_places_list, only: [:show, :yard, :room, :tower, :hydroponics]

@@ -14,7 +14,7 @@ function generate_user_item(city_id, item) {
 					<a class="push_link" title="'+ item.name + '" data-remote="true" href="' + href + '"> \
 						<div class="item_thumbnail"><img src="/assets/thumbnails/' + item.name + '.png" /></div> \
 					</a> \
-					<a class="craft_link" title="Move to crafting slot" data-remote="true" href="#"> \
+					<a class="craft_link" title="Move to crafting slot" data-remote="true" href="#" onclick="putItemToSlot(' + item.id + ', \'' + item.name +'\')"> \
 						<div class="craft_button"></div> \
 					</a> \
 				</li>';

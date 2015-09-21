@@ -52,8 +52,66 @@ class UsersController < ApplicationController
     WebsocketRails["binder"].trigger("rebind", { new_room: current_user.place })
   end
 
+  def get_user_items
+    respond_to do |format|
+      prepare_items_list()
+      format.js {}
+    end
+  end
+
+  def craft_item
+    items_ids = []
+    for index in 0..2
+       items_ids.push(params['item_%d_id' % index]);
+    end
+    craft_allowed = true;
+    items = []
+    for item_id in items_ids
+      item = Item.find(item_id)
+      if (item.user != current_user)
+        craft_allowed = false
+        break;
+      else
+        items.push(item)
+      end
+    end
+    if craft_allowed
+      recipe = Recipe.find_by item_1: items[0].description.id, item_2: items[1].description.id, item_3: items[2].description.id
+      if recipe != nil
+        @completed = "Yes"
+        @recipe = recipe
+        crafted_result_type = recipe.item_result.id
+        crafted_item = Item.new
+        crafted_item.description = DefinedItem.find(recipe.item_result.id)
+        crafted_item.user = current_user
+        crafted_item.save()
+        for item_id in items_ids
+          Item.destroy(item_id)
+        end
+        prepare_items_list()
+        respond_to do |format|
+          format.js {}
+        end
+      end
+    end
+    respond_to do |format|
+      format.js {}
+    end
+  end
+
   private
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    end
+
+    def prepare_items_list
+      user_items = Item.where(user: current_user)
+      @user_items_names = []
+      @city_id = current_user.mothercity.id
+      if user_items != nil
+        for user_item in user_items do
+          @user_items_names.push({ name: user_item.description.name, id: user_item.id })
+        end
+      end
     end
 end
