@@ -88,12 +88,14 @@ class UsersController < ApplicationController
         for item_id in items_ids
           Item.destroy(item_id)
         end
-        prepare_items_list()
-        respond_to do |format|
-          format.js {}
-        end
+        flash[:success] = "Crafted %s" % crafted_item.description.name
+      else
+        flash[:warning] = "Recipe not found"
       end
+    else
+      flash[:warning] = "Craft not allowed. Maybe you don't have needed items"
     end
+    prepare_items_list()
     respond_to do |format|
       format.js {}
     end

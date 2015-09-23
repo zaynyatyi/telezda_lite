@@ -1,3 +1,4 @@
+$('#flashes_container').html('<%= escape_javascript(render 'layouts/flash') %>');
 var user_items_names = <%= raw @user_items_names.to_json %>
 var city_id = <%= raw @city_id %>
 

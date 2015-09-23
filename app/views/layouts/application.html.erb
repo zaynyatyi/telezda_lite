@@ -13,9 +13,9 @@
     <% if logged_in? %>
       <%= content_tag :div, :id => "place_holder", :data => {:place => current_user.place} do %><% end %>
     <% end %>
-    <% flash.each do |message_type, message| %>
-        <div class="alert alert-<%= message_type %>"><%= message %></div>
-    <% end %>
+    <div id="flashes_container">
+      <%= render 'layouts/flash' %>
+    </div>
     <%= yield %>
     <%= render 'layouts/footer' %>
     <%= render 'layouts/whoops_alert' %>
