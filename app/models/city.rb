@@ -3,6 +3,7 @@ class City < ActiveRecord::Base
                           foreign_key: "city_id",
                           dependent: :destroy
   has_many :citizens, through: :citizenships, source: :citizen
+  has_many :buildings
   has_one :stock
   validates :name, presence: true, length: { maximum: 50 }
 

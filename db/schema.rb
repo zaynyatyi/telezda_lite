@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150919123957) do
+ActiveRecord::Schema.define(version: 20150923072313) do
+
+  create_table "building_descriptions", force: :cascade do |t|
+    t.integer  "building_id",         limit: 4
+    t.integer  "defined_building_id", limit: 4
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
+  add_index "building_descriptions", ["building_id", "defined_building_id"], name: "building_description_index", unique: true, using: :btree
+  add_index "building_descriptions", ["building_id"], name: "building_index", using: :btree
+  add_index "building_descriptions", ["defined_building_id"], name: "building_defined_index", using: :btree
 
   create_table "buildings", force: :cascade do |t|
     t.text     "name",       limit: 65535
@@ -38,6 +49,14 @@ ActiveRecord::Schema.define(version: 20150919123957) do
   add_index "citizenships", ["citizen_id"], name: "index_citizenships_on_citizen_id", using: :btree
   add_index "citizenships", ["city_id", "citizen_id"], name: "index_citizenships_on_city_id_and_citizen_id", unique: true, using: :btree
   add_index "citizenships", ["city_id"], name: "index_citizenships_on_city_id", using: :btree
+
+  create_table "defined_buildings", force: :cascade do |t|
+    t.string   "name",       limit: 30
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  add_index "defined_buildings", ["name"], name: "index_defined_buildings_on_name", unique: true, using: :btree
 
   create_table "defined_items", force: :cascade do |t|
     t.string   "name",       limit: 30

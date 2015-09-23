@@ -32,6 +32,7 @@ class CityController < ApplicationController
   end
 
   def tower
+    @buildings = Building.where(city: @city)
     @users = User.where(is_stalker: true)
     WebsocketRails["binder"].trigger("rebind", { new_room: "tower" })
   end
