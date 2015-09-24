@@ -1,10 +1,10 @@
 class CityController < ApplicationController
   include UsersHelper
-  before_action :check_migrations, only: [:yard, :room, :tower, :hydroponics]
+  before_action :check_migrations, only: [:yard, :construction, :room, :tower, :hydroponics]
   before_action "logged_in_user"
   before_action "admin_user", only: [:index, :edit, :update, :destroy]
-  before_action :init_places_list, only: [:show, :yard, :room, :tower, :hydroponics]
-  before_action :assign_current_place, only: [:yard, :room, :tower, :hydroponics]
+  before_action :init_places_list, only: [:show, :yard, :construction, :room, :tower, :hydroponics]
+  before_action :assign_current_place, only: [:yard, :construction, :room, :tower, :hydroponics]
 
   def index
     @cities = City.all
@@ -29,6 +29,11 @@ class CityController < ApplicationController
     @stock_items = Item.where(stock: @city.stock)
 
     @recipes = Recipe.all
+  end
+
+  def construction
+    @user_items = Item.where(user: current_user)
+    @stock_items = Item.where(stock: @city.stock)
   end
 
   def tower
@@ -89,6 +94,7 @@ class CityController < ApplicationController
       @city = City.find(params[:id])
       @places = [
         {name: "Yard", action: "yard"},
+        {name: "Construction", action: "construction"},
         {name: "Watch Tower", action: "tower"},
         {name: "Room", action: "room"},
         {name: "Hydroponics", action: "hydroponics"}
