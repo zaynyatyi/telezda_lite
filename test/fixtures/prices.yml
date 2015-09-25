@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  defined_item_id: 
+  count: 
+
+two:
+  defined_item_id: 
+  count: 

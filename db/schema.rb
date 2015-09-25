@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150923072313) do
+ActiveRecord::Schema.define(version: 20150925190503) do
+
+  create_table "blueprints", force: :cascade do |t|
+    t.integer  "defined_building_id", limit: 4
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
+  add_index "blueprints", ["defined_building_id"], name: "index_blueprints_on_defined_building_id", using: :btree
 
   create_table "building_descriptions", force: :cascade do |t|
     t.integer  "building_id",         limit: 4
@@ -87,6 +95,17 @@ ActiveRecord::Schema.define(version: 20150923072313) do
   add_index "items", ["stock_id"], name: "index_items_on_stock_id", using: :btree
   add_index "items", ["user_id"], name: "index_items_on_user_id", using: :btree
 
+  create_table "prices", force: :cascade do |t|
+    t.integer  "defined_item_id", limit: 4
+    t.integer  "count",           limit: 4
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.integer  "blueprint_id",    limit: 4
+  end
+
+  add_index "prices", ["blueprint_id"], name: "index_prices_on_blueprint_id", using: :btree
+  add_index "prices", ["defined_item_id"], name: "index_prices_on_defined_item_id", using: :btree
+
   create_table "recipes", force: :cascade do |t|
     t.string   "name",           limit: 255
     t.integer  "item_1_id",      limit: 4
@@ -131,9 +150,12 @@ ActiveRecord::Schema.define(version: 20150923072313) do
 
   add_index "users", ["place"], name: "index_users_on_place", using: :btree
 
+  add_foreign_key "blueprints", "defined_buildings"
   add_foreign_key "buildings", "cities"
   add_foreign_key "items", "stocks"
   add_foreign_key "items", "users"
+  add_foreign_key "prices", "blueprints"
+  add_foreign_key "prices", "defined_items"
   add_foreign_key "recipes", "defined_items", column: "item_1_id"
   add_foreign_key "recipes", "defined_items", column: "item_2_id"
   add_foreign_key "recipes", "defined_items", column: "item_3_id"
