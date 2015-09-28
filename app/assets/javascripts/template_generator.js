@@ -4,6 +4,7 @@ function generate_stock_item(city_id, item) {
 					<a class="pop_link" title="'+ item.name + '" data-remote="true" href="' + href + '"> \
 						<div class="item_thumbnail"><img src="/assets/thumbnails/' + item.name + '.png" /></div> \
 					</a> \
+					<div class="item_amount">' + item.amount + '</div> \
 				</li>';
 	return html;
 }

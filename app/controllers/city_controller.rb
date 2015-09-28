@@ -1,5 +1,6 @@
 class CityController < ApplicationController
   include UsersHelper
+  include ItemHelper
   before_action :check_migrations, only: [:yard, :construction, :room, :tower, :hydroponics]
   before_action "logged_in_user"
   before_action "admin_user", only: [:index, :edit, :update, :destroy]
@@ -26,14 +27,14 @@ class CityController < ApplicationController
 
   def yard
     @user_items = Item.where(user: current_user)
-    @stock_items = Item.where(stock: @city.stock)
+    group_stock_items(@city.stock)
 
     @recipes = Recipe.all
   end
 
   def construction
     @user_items = Item.where(user: current_user)
-    @stock_items = Item.where(stock: @city.stock)
+    group_stock_items(@city.stock)
   end
 
   def tower

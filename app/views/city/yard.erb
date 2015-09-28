@@ -16,11 +16,14 @@
   <div class="col-xs-3 items_list bordered" id="stock_items_list">
     <h3>Stock items</h3>
     <ul>
-      <% @stock_items.each do |item| %>
+      <% @grouped_stock_items.keys.each do |item_name| %>
       <li>
-        <%= link_to city_item_pop_from_city_stock_path(@city, item.id), class: "pop_link", remote: true, title: item.description.name do %>
-          <div class="item_thumbnail"><img src="/assets/thumbnails/<%= item.description.name %>.png" /></div>
+        <div>
+        <%= link_to city_item_pop_from_city_stock_path(@city, @grouped_stock_items[item_name][:id]), class: "pop_link", remote: true, title: item_name do %>
+          <div class="item_thumbnail"><img src="/assets/thumbnails/<%= item_name %>.png" /></div>
         <% end %>
+        <div class="item_amount"><%= @grouped_stock_items[item_name][:amount] %></div>
+        </div>
       </li>
       <% end %>
     </ul>

@@ -1,4 +1,5 @@
 class ItemController < ApplicationController
+  include ItemHelper
   include SessionsHelper
   def push_to_city_stock
     item = Item.find(params[:item_id])
@@ -36,13 +37,11 @@ class ItemController < ApplicationController
 
   private
     def notify_items_in_stock_changed(city_stock, city_id)
-      stock_items = Item.where(stock: city_stock)
+      group_stock_items(city_stock)
       stock_items_names = []
 
-      if stock_items != nil
-        for stock_item in stock_items do
-          stock_items_names.push({ name: stock_item.description.name, id: stock_item.id })
-        end
+      for stock_item in @grouped_stock_items.keys do
+        stock_items_names.push({ name: stock_item, id: @grouped_stock_items[stock_item][:id], amount: @grouped_stock_items[stock_item][:amount] })
       end
       WebsocketRails["items"].trigger("items_list_changed", {:city_id => city_id, :stock_items => stock_items_names})
     end
