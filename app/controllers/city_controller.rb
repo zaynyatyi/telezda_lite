@@ -33,12 +33,11 @@ class CityController < ApplicationController
   end
 
   def construction
-    @user_items = Item.where(user: current_user)
+    @buildings = Building.where(city: @city)
     group_stock_items(@city.stock)
   end
 
   def tower
-    @buildings = Building.where(city: @city)
     @users = User.where(is_stalker: true)
     WebsocketRails["binder"].trigger("rebind", { new_room: "tower" })
   end

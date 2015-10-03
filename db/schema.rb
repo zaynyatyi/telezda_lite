@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150925190503) do
+ActiveRecord::Schema.define(version: 20151003091420) do
 
   create_table "blueprints", force: :cascade do |t|
     t.integer  "defined_building_id", limit: 4
@@ -57,6 +57,27 @@ ActiveRecord::Schema.define(version: 20150925190503) do
   add_index "citizenships", ["citizen_id"], name: "index_citizenships_on_citizen_id", using: :btree
   add_index "citizenships", ["city_id", "citizen_id"], name: "index_citizenships_on_city_id_and_citizen_id", unique: true, using: :btree
   add_index "citizenships", ["city_id"], name: "index_citizenships_on_city_id", using: :btree
+
+  create_table "construction_kits", force: :cascade do |t|
+    t.integer  "city_id",      limit: 4
+    t.integer  "blueprint_id", limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "construction_kits", ["blueprint_id"], name: "index_construction_kits_on_blueprint_id", using: :btree
+  add_index "construction_kits", ["city_id"], name: "index_construction_kits_on_city_id", using: :btree
+
+  create_table "construction_slots", force: :cascade do |t|
+    t.integer  "defined_item_id",     limit: 4
+    t.integer  "amount",              limit: 4
+    t.integer  "construction_kit_id", limit: 4
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
+  add_index "construction_slots", ["construction_kit_id"], name: "index_construction_slots_on_construction_kit_id", using: :btree
+  add_index "construction_slots", ["defined_item_id"], name: "index_construction_slots_on_defined_item_id", using: :btree
 
   create_table "defined_buildings", force: :cascade do |t|
     t.string   "name",       limit: 30
@@ -152,6 +173,10 @@ ActiveRecord::Schema.define(version: 20150925190503) do
 
   add_foreign_key "blueprints", "defined_buildings"
   add_foreign_key "buildings", "cities"
+  add_foreign_key "construction_kits", "blueprints"
+  add_foreign_key "construction_kits", "cities"
+  add_foreign_key "construction_slots", "construction_kits"
+  add_foreign_key "construction_slots", "defined_items"
   add_foreign_key "items", "stocks"
   add_foreign_key "items", "users"
   add_foreign_key "prices", "blueprints"
