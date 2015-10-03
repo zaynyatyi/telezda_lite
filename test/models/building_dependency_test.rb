@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ConstructionSlotTest < ActiveSupport::TestCase
+class BuildingDependencyTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

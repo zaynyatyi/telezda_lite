@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151003091420) do
+ActiveRecord::Schema.define(version: 20151003115746) do
 
   create_table "blueprints", force: :cascade do |t|
     t.integer  "defined_building_id", limit: 4
@@ -20,6 +20,16 @@ ActiveRecord::Schema.define(version: 20151003091420) do
   end
 
   add_index "blueprints", ["defined_building_id"], name: "index_blueprints_on_defined_building_id", using: :btree
+
+  create_table "building_dependencies", force: :cascade do |t|
+    t.integer  "defined_building_id", limit: 4
+    t.integer  "blueprint_id",        limit: 4
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
+  add_index "building_dependencies", ["blueprint_id"], name: "index_building_dependencies_on_blueprint_id", using: :btree
+  add_index "building_dependencies", ["defined_building_id"], name: "index_building_dependencies_on_defined_building_id", using: :btree
 
   create_table "building_descriptions", force: :cascade do |t|
     t.integer  "building_id",         limit: 4
@@ -67,17 +77,6 @@ ActiveRecord::Schema.define(version: 20151003091420) do
 
   add_index "construction_kits", ["blueprint_id"], name: "index_construction_kits_on_blueprint_id", using: :btree
   add_index "construction_kits", ["city_id"], name: "index_construction_kits_on_city_id", using: :btree
-
-  create_table "construction_slots", force: :cascade do |t|
-    t.integer  "defined_item_id",     limit: 4
-    t.integer  "amount",              limit: 4
-    t.integer  "construction_kit_id", limit: 4
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
-  end
-
-  add_index "construction_slots", ["construction_kit_id"], name: "index_construction_slots_on_construction_kit_id", using: :btree
-  add_index "construction_slots", ["defined_item_id"], name: "index_construction_slots_on_defined_item_id", using: :btree
 
   create_table "defined_buildings", force: :cascade do |t|
     t.string   "name",       limit: 30
@@ -172,11 +171,11 @@ ActiveRecord::Schema.define(version: 20151003091420) do
   add_index "users", ["place"], name: "index_users_on_place", using: :btree
 
   add_foreign_key "blueprints", "defined_buildings"
+  add_foreign_key "building_dependencies", "blueprints"
+  add_foreign_key "building_dependencies", "defined_buildings"
   add_foreign_key "buildings", "cities"
   add_foreign_key "construction_kits", "blueprints"
   add_foreign_key "construction_kits", "cities"
-  add_foreign_key "construction_slots", "construction_kits"
-  add_foreign_key "construction_slots", "defined_items"
   add_foreign_key "items", "stocks"
   add_foreign_key "items", "users"
   add_foreign_key "prices", "blueprints"
