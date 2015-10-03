@@ -36,6 +36,9 @@ $(document).ready(function() {
       case "yard":
         bindYardListeners();
       break;
+      case "construction":
+        bindConstructionListeners();
+      break;
     }
   }
 
@@ -44,6 +47,10 @@ $(document).ready(function() {
   }
 
   function bindYardListeners() {
+    items.bind("items_list_changed", refreshItemsLists);
+  }
+
+  function bindConstructionListeners() {
     items.bind("items_list_changed", refreshItemsLists);
   }
 
